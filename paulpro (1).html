@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PaulPro — Creative Brand Strategy &amp; Cinematography</title>
+<meta name="description" content="PaulPro is a creative brand strategy studio handling cinematography, photography, graphics, web design, video editing and consulting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0c;
+    --panel:#141416;
+    --panel2:#1b1b1e;
+    --paper:#edeae2;
+    --muted:#8a8680;
+    --rec:#e1402c;
+    --gold:#c9a227;
+    --hair:rgba(237,234,226,0.12);
+    --hair-strong:rgba(237,234,226,0.22);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--paper);
+    font-family:'Inter',sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+    position:relative;
+  }
+  ::selection{ background:var(--rec); color:var(--paper); }
+
+  /* grain overlay */
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    z-index:999;
+    pointer-events:none;
+    opacity:0.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
+
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .eyebrow .rec-dot{
+    display:inline-block; width:6px; height:6px; border-radius:50%;
+    background:var(--rec); margin-right:8px; vertical-align:1px;
+    animation:blink 1.6s infinite ease-in-out;
+    box-shadow:0 0 6px var(--rec);
+  }
+  @keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:0.25;} }
+
+  h1,h2,h3{ font-family:'Fraunces',serif; font-weight:500; line-height:1.05; }
+  em, .italic{ font-style:italic; font-weight:500; }
+
+  a{ color:inherit; text-decoration:none; }
+  .container{ max-width:1240px; margin:0 auto; padding:0 40px; }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:200;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:26px 40px;
+    mix-blend-mode:difference;
+  }
+  .logo{
+    font-family:'Fraunces',serif; font-weight:600; font-size:20px; letter-spacing:0.01em;
+  }
+  .logo span{ color:var(--rec); font-style:italic; }
+  nav{ display:flex; align-items:center; gap:36px; }
+  nav .navlinks{ display:flex; gap:28px; }
+  nav a.navlink{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.05em; text-transform:uppercase;
+    color:var(--paper); opacity:0.75; position:relative; padding-bottom:2px;
+  }
+  nav a.navlink:hover{ opacity:1; }
+  .talk-btn{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.05em; text-transform:uppercase;
+    border:1px solid var(--hair-strong); padding:10px 18px; border-radius:100px;
+    display:flex; align-items:center; gap:8px; transition:all .25s ease;
+  }
+  .talk-btn:hover{ border-color:var(--rec); background:var(--rec); }
+  @media(max-width:860px){ nav .navlinks{ display:none; } }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; min-height:100vh;
+    display:flex; flex-direction:column; justify-content:flex-end;
+    padding:0 0 90px 0;
+    overflow:hidden;
+  }
+  .hero-bg{
+    position:absolute; inset:0; z-index:0;
+  }
+  .hero-bg img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    filter:grayscale(35%) contrast(1.1) brightness(0.62);
+    transform:scale(1.06);
+    animation:heroZoom 18s ease-in-out infinite alternate;
+  }
+  @keyframes heroZoom{ from{ transform:scale(1.06); } to{ transform:scale(1.14); } }
+  .hero-bg::after{
+    content:"";
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 90% 60% at 50% 0%, rgba(225,64,44,0.14), transparent 60%),
+      linear-gradient(180deg, rgba(11,11,12,0.35) 0%, rgba(11,11,12,0.55) 45%, rgba(11,11,12,0.96) 92%);
+  }
+  .letterbox{
+    position:absolute; left:0; right:0; height:64px; background:#000; z-index:20;
+    transform-origin:center;
+  }
+  .letterbox.top{ top:0; }
+  .letterbox.bottom{ bottom:0; }
+
+  .hud{
+    position:absolute; inset:64px 0; z-index:5; pointer-events:none;
+  }
+  .hud .corner{
+    position:absolute; width:34px; height:34px; border-color:var(--hair-strong);
+  }
+  .hud .corner.tl{ top:100px; left:40px; border-top:1px solid; border-left:1px solid; }
+  .hud .corner.tr{ top:100px; right:40px; border-top:1px solid; border-right:1px solid; }
+  .hud .corner.bl{ bottom:40px; left:40px; border-bottom:1px solid; border-left:1px solid; }
+  .hud .corner.br{ bottom:40px; right:40px; border-bottom:1px solid; border-right:1px solid; }
+
+  .hud .timecode{
+    position:absolute; top:100px; right:88px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted);
+    letter-spacing:0.05em; text-align:right;
+  }
+  .hud .timecode b{ color:var(--paper); font-weight:500; }
+  .hud .rec-label{
+    position:absolute; top:100px; left:88px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--paper);
+    letter-spacing:0.05em; display:flex; align-items:center; gap:8px;
+  }
+  .hud .aperture{
+    position:absolute; bottom:44px; left:88px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted); letter-spacing:0.05em;
+  }
+  .hud .frame-count{
+    position:absolute; bottom:44px; right:88px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted); letter-spacing:0.05em;
+  }
+
+  .hero-inner{ position:relative; z-index:10; padding:0 88px; margin-top:230px; }
+  .hero-tags{ display:flex; gap:10px; margin-bottom:28px; flex-wrap:wrap; }
+  .hero-tag{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+    border:1px solid var(--hair); padding:6px 12px; border-radius:100px; color:var(--muted);
+  }
+  h1.hero-title{
+    font-size:clamp(42px, 7.2vw, 108px);
+    max-width:1000px;
+    letter-spacing:-0.01em;
+  }
+  h1.hero-title .line{ display:block; overflow:hidden; }
+  h1.hero-title .line span{ display:block; transform:translateY(110%); animation:riseUp 1s cubic-bezier(.22,1,.36,1) forwards; }
+  h1.hero-title .line:nth-child(1) span{ animation-delay:.55s; }
+  h1.hero-title .line:nth-child(2) span{ animation-delay:.68s; }
+  @keyframes riseUp{ to{ transform:translateY(0); } }
+
+  .hero-sub{
+    margin-top:30px; max-width:480px; font-size:16px; line-height:1.7; color:var(--muted);
+  }
+  .hero-bottom{
+    display:flex; justify-content:space-between; align-items:flex-end; margin-top:60px; flex-wrap:wrap; gap:24px;
+  }
+  .scroll-cue{
+    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase;
+    display:flex; align-items:center; gap:10px;
+  }
+  .scroll-cue .bar{ width:1px; height:30px; background:var(--hair-strong); position:relative; overflow:hidden; }
+  .scroll-cue .bar::after{
+    content:""; position:absolute; top:-30px; left:0; width:100%; height:30px; background:var(--gold);
+    animation:scrollbar 1.8s infinite ease-in-out;
+  }
+  @keyframes scrollbar{ 0%{ top:-30px; } 100%{ top:30px; } }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee-wrap{
+    border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);
+    padding:26px 0; overflow:hidden; white-space:nowrap; background:var(--panel);
+  }
+  .marquee{ display:inline-flex; animation:scroll 32s linear infinite; }
+  .marquee span{
+    font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--muted); padding:0 34px; display:inline-flex; align-items:center; gap:34px;
+  }
+  .marquee span::after{ content:"◆"; color:var(--rec); font-size:8px; }
+  @keyframes scroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+  /* ---------- SECTION generic ---------- */
+  section{ padding:150px 0; position:relative; }
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:70px; gap:40px; flex-wrap:wrap; }
+  .section-head h2{ font-size:clamp(32px,4vw,56px); }
+  .section-num{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted); letter-spacing:0.1em; }
+
+  .reveal{ opacity:0; transform:translateY(36px); transition:opacity .9s ease, transform .9s cubic-bezier(.22,1,.36,1); }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:90px; align-items:center; }
+  @media(max-width:900px){ .about-grid{ grid-template-columns:1fr; gap:50px; } }
+  .about-frame{
+    position:relative; aspect-ratio:4/5; border-radius:6px; overflow:hidden;
+    border:1px solid var(--hair-strong);
+  }
+  .about-frame img{ width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(45%) contrast(1.08); }
+  .about-frame .ring{
+    position:absolute; inset:18px; border:1px solid rgba(237,234,226,0.35); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .about-frame .ring::before{
+    content:"f/1.8"; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--paper);
+    background:rgba(11,11,12,0.6); padding:4px 8px; border-radius:100px; letter-spacing:0.05em;
+  }
+  .about-frame .tag{
+    position:absolute; bottom:18px; left:18px; font-family:'JetBrains Mono',monospace; font-size:11px;
+    color:var(--paper); background:rgba(11,11,12,0.55); padding:6px 10px; border-radius:4px; letter-spacing:0.05em;
+  }
+  .about-copy h3.lede{ font-size:clamp(24px,2.6vw,34px); font-weight:400; line-height:1.35; margin-bottom:30px; }
+  .about-copy p{ color:var(--muted); line-height:1.8; margin-bottom:18px; font-size:15.5px; max-width:520px; }
+  .about-actions{ margin-top:36px; display:flex; align-items:center; gap:26px; flex-wrap:wrap; }
+  .btn-primary{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.06em; text-transform:uppercase;
+    background:var(--paper); color:var(--bg); padding:15px 26px; border-radius:100px; display:inline-flex; align-items:center; gap:10px;
+    transition:all .25s ease;
+  }
+  .btn-primary:hover{ background:var(--rec); color:var(--paper); }
+  .btn-ghost{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted);
+    border-bottom:1px solid var(--hair-strong); padding-bottom:3px;
+  }
+
+  /* ---------- SERVICES (shot list) ---------- */
+  .shotlist{ border-top:1px solid var(--hair); }
+  .shot{
+    display:grid; grid-template-columns:110px 1fr 340px; gap:30px; align-items:start;
+    padding:38px 0; border-bottom:1px solid var(--hair);
+    transition:background .3s ease;
+  }
+  .shot:hover{ background:rgba(237,234,226,0.02); }
+  @media(max-width:820px){ .shot{ grid-template-columns:70px 1fr; } .shot-desc{ grid-column:1/-1; } }
+  .shot-scene{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--gold); letter-spacing:0.08em; padding-top:6px; }
+  .shot-scene small{ display:block; color:var(--muted); margin-top:4px; font-size:10px; }
+  .shot-title{ font-size:clamp(22px,2.4vw,32px); font-weight:500; letter-spacing:-0.01em; }
+  .shot-desc{ color:var(--muted); font-size:14.5px; line-height:1.75; padding-top:8px; }
+
+  /* ---------- WORKS ---------- */
+  .works-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:2px; background:var(--hair); border:1px solid var(--hair); }
+  @media(max-width:760px){ .works-grid{ grid-template-columns:1fr; } }
+  .work-card{
+    background:var(--bg); position:relative; aspect-ratio:5/4; overflow:hidden; display:block; cursor:pointer;
+  }
+  .work-card img{ width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(70%) brightness(0.75); transition:transform 1.1s cubic-bezier(.22,1,.36,1), filter .6s ease; }
+  .work-card:hover img{ transform:scale(1.06); filter:grayscale(0%) brightness(0.9); }
+  .work-info{
+    position:absolute; left:0; right:0; bottom:0; padding:26px 30px; display:flex; justify-content:space-between; align-items:flex-end;
+    background:linear-gradient(0deg, rgba(0,0,0,0.75), transparent 80%);
+  }
+  .work-info h4{ font-family:'Fraunces',serif; font-weight:500; font-size:22px; }
+  .work-info .work-meta{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); text-align:right; letter-spacing:0.05em; }
+  .work-frame-corner{
+    position:absolute; top:20px; right:20px; font-family:'JetBrains Mono',monospace; font-size:10px; color:rgba(237,234,226,0.6);
+    letter-spacing:0.05em; opacity:0; transition:opacity .3s ease;
+  }
+  .work-card:hover .work-frame-corner{ opacity:1; }
+
+  /* ---------- AWARDS / LAURELS ---------- */
+  .laurels{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--hair); border:1px solid var(--hair); }
+  @media(max-width:820px){ .laurels{ grid-template-columns:1fr; } }
+  .laurel{ background:var(--bg); padding:44px 34px; text-align:center; }
+  .laurel .lyear{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--gold); letter-spacing:0.1em; }
+  .laurel svg{ width:46px; height:46px; margin:18px auto; display:block; opacity:0.85; }
+  .laurel h5{ font-family:'Fraunces',serif; font-style:italic; font-weight:500; font-size:18px; margin-bottom:8px; }
+  .laurel p{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:0.03em; }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-wrap{ border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:80px 0; position:relative; }
+  .testi{ max-width:760px; margin:0 auto; text-align:center; display:none; }
+  .testi.active{ display:block; animation:fadeIn .7s ease; }
+  @keyframes fadeIn{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:translateY(0); } }
+  .testi blockquote{ font-family:'Fraunces',serif; font-style:italic; font-weight:400; font-size:clamp(22px,2.8vw,32px); line-height:1.5; }
+  .testi .who{ margin-top:30px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted); letter-spacing:0.05em; }
+  .testi .who b{ color:var(--paper); font-style:normal; }
+  .testi-nav{ display:flex; justify-content:center; gap:10px; margin-top:44px; }
+  .testi-dot{ width:6px; height:6px; border-radius:50%; background:var(--hair-strong); cursor:pointer; transition:background .3s ease, transform .3s ease; }
+  .testi-dot.active{ background:var(--rec); transform:scale(1.4); }
+
+  /* ---------- CTA ---------- */
+  .cta{
+    text-align:center; position:relative; padding:180px 0;
+    background:radial-gradient(ellipse 70% 70% at 50% 40%, rgba(225,64,44,0.09), transparent 70%);
+  }
+  .cta h2{ font-size:clamp(38px,6.5vw,88px); }
+  .cta .btn-primary{ margin-top:44px; padding:18px 34px; font-size:13px; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ border-top:1px solid var(--hair); padding:70px 0 34px; }
+  .foot-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:70px; }
+  @media(max-width:820px){ .foot-grid{ grid-template-columns:1fr 1fr; } }
+  .foot-grid h6{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:18px; }
+  .foot-grid a, .foot-grid p{ display:block; font-size:14px; color:var(--paper); opacity:0.85; margin-bottom:10px; }
+  .foot-grid a:hover{ opacity:1; color:var(--rec); }
+  .foot-bottom{ display:flex; justify-content:space-between; align-items:center; padding-top:26px; border-top:1px solid var(--hair); flex-wrap:wrap; gap:14px; }
+  .foot-bottom p{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); letter-spacing:0.03em; }
+
+  @media(max-width:760px){
+    .hero-inner{ padding:0 22px; margin-top:170px; }
+    .hud{ inset:64px 0; }
+    .hud .corner, .hud .timecode, .hud .rec-label, .hud .aperture, .hud .frame-count{ left:22px !important; right:22px !important; }
+    header{ padding:20px 22px; }
+    .container{ padding:0 22px; }
+    section{ padding:90px 0; }
+    .about-grid, .foot-grid{ gap:36px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="letterbox top" id="lbTop"></div>
+<div class="letterbox bottom" id="lbBottom"></div>
+
+<header>
+  <a href="#" class="logo">PAUL<span>PRO</span></a>
+  <nav>
+    <div class="navlinks">
+      <a class="navlink" href="#work">Work</a>
+      <a class="navlink" href="#services">Services</a>
+      <a class="navlink" href="#about">About</a>
+      <a class="navlink" href="#contact">Contact</a>
+    </div>
+    <a class="talk-btn" href="mailto:hello@paulpro.studio"><span class="rec-dot" style="animation:none;"></span>Let's talk</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=2400&auto=format&fit=crop" alt="Cinematographer framing a shot on a film set">
+  </div>
+  <div class="hud">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+    <div class="rec-label"><span class="rec-dot"></span> REC</div>
+    <div class="timecode" id="timecode">00:00:00:00</div>
+    <div class="aperture">ƒ/1.8 — 24MM — ISO 400</div>
+    <div class="frame-count">based in Port Harcourt, NG</div>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-tags">
+      <span class="hero-tag">Cinematography</span>
+      <span class="hero-tag">Photography</span>
+      <span class="hero-tag">Brand Strategy</span>
+      <span class="hero-tag">Web Design</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="line"><span>Every frame is a</span></span>
+      <span class="line"><span><em>promise&nbsp;to&nbsp;the&nbsp;brand.</em></span></span>
+    </h1>
+    <p class="hero-sub">PaulPro is a creative brand strategy studio built around the camera — cinematography, photography, graphics, web design, editing and consulting, all directed toward one shot: a brand people remember.</p>
+
+    <div class="hero-bottom">
+      <div class="scroll-cue"><div class="bar"></div>Scroll to play</div>
+      <div class="eyebrow">Pro means professional. Not a joke.</div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee">
+    <span>Cinematography<span>Photography<span>Graphic Design<span>Web Design<span>Video Editing<span>Brand Consulting<span>Cinematography<span>Photography<span>Graphic Design<span>Web Design<span>Video Editing<span>Brand Consulting</span></span></span></span></span></span></span></span></span></span></span></span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-frame reveal">
+        <img src="https://images.unsplash.com/photo-1500522144261-ea64433bbe27?q=80&w=1200&auto=format&fit=crop" alt="Cinematographer operating a camera on set">
+        <div class="ring"></div>
+        <div class="tag">PAUL — DIRECTOR / DP</div>
+      </div>
+      <div class="about-copy reveal">
+        <div class="eyebrow" style="margin-bottom:20px;">— about paulpro.</div>
+        <h3 class="lede">A one-stop production house for brands who'd rather look inevitable than trendy.</h3>
+        <p>PaulPro is a creative brand strategy studio that handles every aspect of cinematography — from concept to color grade — alongside photography, graphic design, web design, video editing and consulting.</p>
+        <p>The "Pro" isn't a flourish. It's the standard: every shot lit with intent, every edit paced on purpose, every brand decision made with the same discipline a director brings to set.</p>
+        <div class="about-actions">
+          <a href="#work" class="btn-primary">View the work ↗</a>
+          <a href="#contact" class="btn-ghost">Watch showreel</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>The shot list.</h2>
+      <div class="section-num">01 / SERVICES — SIX SETUPS, ONE STORY</div>
+    </div>
+    <div class="shotlist reveal">
+      <div class="shot">
+        <div class="shot-scene">SCENE 01<small>WIDE</small></div>
+        <div class="shot-title">Cinematography</div>
+        <div class="shot-desc">Commercials, brand films and documentary work shot with the same rigor as narrative cinema — story first, spec sheet second.</div>
+      </div>
+      <div class="shot">
+        <div class="shot-scene">SCENE 02<small>CLOSE-UP</small></div>
+        <div class="shot-title">Photography</div>
+        <div class="shot-desc">Product, portrait and campaign photography that holds up at billboard size and thumbnail size alike.</div>
+      </div>
+      <div class="shot">
+        <div class="shot-scene">SCENE 03<small>INSERT</small></div>
+        <div class="shot-title">Graphic Design</div>
+        <div class="shot-desc">Logos, identity systems and print collateral built to survive contact with the real world, not just a moodboard.</div>
+      </div>
+      <div class="shot">
+        <div class="shot-scene">SCENE 04<small>TRACKING</small></div>
+        <div class="shot-title">Web Design</div>
+        <div class="shot-desc">Sites that move like well-cut film — clear pacing, deliberate reveals, nothing on screen that isn't earning its place.</div>
+      </div>
+      <div class="shot">
+        <div class="shot-scene">SCENE 05<small>MATCH CUT</small></div>
+        <div class="shot-title">Video Editing</div>
+        <div class="shot-desc">Post-production, color and sound that turn raw footage into something with a pulse — for ads, socials and long-form alike.</div>
+      </div>
+      <div class="shot">
+        <div class="shot-scene">SCENE 06<small>FINAL TAKE</small></div>
+        <div class="shot-title">Brand Consulting</div>
+        <div class="shot-desc">Strategy sessions that sit upstream of all of the above, so every frame, page and post is pulling in the same direction.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Selected works.</h2>
+      <div class="section-num">02 / PORTFOLIO — 2025 REEL</div>
+    </div>
+    <div class="works-grid reveal">
+      <a class="work-card">
+        <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200&auto=format&fit=crop" alt="Film set with dramatic lighting">
+        <div class="work-frame-corner">01 / 06</div>
+        <div class="work-info"><h4>Northgate Brand Film</h4><div class="work-meta">2025<br>Cinematography</div></div>
+      </a>
+      <a class="work-card">
+        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1200&auto=format&fit=crop" alt="Photographer shooting a campaign">
+        <div class="work-frame-corner">02 / 06</div>
+        <div class="work-info"><h4>Amara Skincare Campaign</h4><div class="work-meta">2025<br>Photography</div></div>
+      </a>
+      <a class="work-card">
+        <img src="https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=1200&auto=format&fit=crop" alt="Brand identity design layout">
+        <div class="work-frame-corner">03 / 06</div>
+        <div class="work-info"><h4>Vela Coffee Rebrand</h4><div class="work-meta">2025<br>Brand + Graphic Design</div></div>
+      </a>
+      <a class="work-card">
+        <img src="https://images.unsplash.com/photo-1547082299-de196ea013d6?q=80&w=1200&auto=format&fit=crop" alt="Video editing suite with monitors">
+        <div class="work-frame-corner">04 / 06</div>
+        <div class="work-info"><h4>Harbor Line Documentary</h4><div class="work-meta">2025<br>Editing + Color</div></div>
+      </a>
+      <a class="work-card">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop" alt="Website design on laptop screen">
+        <div class="work-frame-corner">05 / 06</div>
+        <div class="work-info"><h4>Studio Marlow Website</h4><div class="work-meta">2025<br>Web Design</div></div>
+      </a>
+      <a class="work-card">
+        <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?q=80&w=1200&auto=format&fit=crop" alt="Creative strategy session">
+        <div class="work-frame-corner">06 / 06</div>
+        <div class="work-info"><h4>Kalu Foods Strategy</h4><div class="work-meta">2025<br>Consulting</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <h2>Awards &amp; recognition.</h2>
+      <div class="section-num">03 / LAURELS</div>
+    </div>
+    <div class="laurels reveal">
+      <div class="laurel">
+        <div class="lyear">2025</div>
+        <svg viewBox="0 0 48 48" fill="none" stroke="#c9a227" stroke-width="1.2"><circle cx="24" cy="18" r="12"/><path d="M17 28 L14 42 L24 36 L34 42 L31 28"/></svg>
+        <h5>Site of the Day</h5>
+        <p>NORTHGATE FILM — AWWWARDS</p>
+      </div>
+      <div class="laurel">
+        <div class="lyear">2025</div>
+        <svg viewBox="0 0 48 48" fill="none" stroke="#c9a227" stroke-width="1.2"><circle cx="24" cy="18" r="12"/><path d="M17 28 L14 42 L24 36 L34 42 L31 28"/></svg>
+        <h5>Best Brand Film</h5>
+        <p>VELA COFFEE — CSS DESIGN AWARDS</p>
+      </div>
+      <div class="laurel">
+        <div class="lyear">2024</div>
+        <svg viewBox="0 0 48 48" fill="none" stroke="#c9a227" stroke-width="1.2"><circle cx="24" cy="18" r="12"/><path d="M17 28 L14 42 L24 36 L34 42 L31 28"/></svg>
+        <h5>Editor's Pick</h5>
+        <p>HARBOR LINE — BEHANCE</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="testi-wrap">
+  <div class="container">
+    <div class="testi active">
+      <blockquote>"PaulPro didn't just film our launch, they directed the whole story. Every frame felt intentional."</blockquote>
+      <div class="who"><b>Sarah Mitchell</b> — Founder, Vela Coffee</div>
+    </div>
+    <div class="testi">
+      <blockquote>"From strategy to final cut, PaulPro brought structure and unmatched craft to our entire brand identity."</blockquote>
+      <div class="who"><b>Daniel Carter</b> — Product Lead, Northgate</div>
+    </div>
+    <div class="testi">
+      <blockquote>"We came for a website. We left with a brand that finally looks the way it sounds."</blockquote>
+      <div class="who"><b>Emily Zhao</b> — Marketing Director, Studio Marlow</div>
+    </div>
+    <div class="testi-nav">
+      <div class="testi-dot active" data-i="0"></div>
+      <div class="testi-dot" data-i="1"></div>
+      <div class="testi-dot" data-i="2"></div>
+    </div>
+  </div>
+</div>
+
+<section class="cta" id="contact">
+  <div class="container">
+    <div class="eyebrow reveal" style="justify-content:center; display:flex; margin-bottom:20px;">— let's roll camera —</div>
+    <h2 class="reveal">Let's make<br><em>something worth<br>the final cut.</em></h2>
+    <a href="mailto:hello@paulpro.studio" class="btn-primary reveal">hello@paulpro.studio ↗</a>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="margin-bottom:16px;">PAUL<span>PRO</span></div>
+        <p style="max-width:280px; color:var(--muted);">Creative brand strategy — cinematography, photography, graphics, web design, editing and consulting.</p>
+      </div>
+      <div>
+        <h6>Studio</h6>
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+      </div>
+      <div>
+        <h6>Contact</h6>
+        <a href="mailto:hello@paulpro.studio">hello@paulpro.studio</a>
+        <a href="#">Port Harcourt, NG</a>
+      </div>
+      <div>
+        <h6>Social</h6>
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+        <a href="https://twitter.com" target="_blank">Twitter / X</a>
+        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p>© 2026 PaulPro Studio. All rights reserved.</p>
+      <p>Cinematography — Photography — Web Design — Consulting</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // letterbox intro
+  window.addEventListener('load', () => {
+    const top = document.getElementById('lbTop');
+    const bottom = document.getElementById('lbBottom');
+    setTimeout(() => {
+      top.style.transition = 'transform 1.1s cubic-bezier(.76,0,.24,1)';
+      bottom.style.transition = 'transform 1.1s cubic-bezier(.76,0,.24,1)';
+      top.style.transform = 'translateY(-100%)';
+      bottom.style.transform = 'translateY(100%)';
+    }, 250);
+  });
+
+  // live timecode (frames at 24fps, purely decorative)
+  const tc = document.getElementById('timecode');
+  let frame = 0;
+  function pad(n){ return String(n).padStart(2,'0'); }
+  setInterval(() => {
+    frame++;
+    let f = frame % 24;
+    let totalSec = Math.floor(frame / 24);
+    let s = totalSec % 60;
+    let m = Math.floor(totalSec / 60) % 60;
+    let h = Math.floor(totalSec / 3600);
+    tc.innerHTML = `${pad(h)}:${pad(m)}:${pad(s)}:<b>${pad(f)}</b>`;
+  }, 1000/24);
+
+  // scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // testimonial rotation
+  const testis = document.querySelectorAll('.testi');
+  const dots = document.querySelectorAll('.testi-dot');
+  let ti = 0;
+  function showTesti(i){
+    testis.forEach(t => t.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    testis[i].classList.add('active');
+    dots[i].classList.add('active');
+    ti = i;
+  }
+  dots.forEach(d => d.addEventListener('click', () => showTesti(parseInt(d.dataset.i))));
+  setInterval(() => { showTesti((ti + 1) % testis.length); }, 5500);
+</script>
+
+</body>
+</html>
